@@ -6,7 +6,7 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/seqdiag-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/seqdiag-{{ version }}.tar.gz
   sha256: e15113a28bd075460a62da44e15a88fafa3c81fdf3a35dcd5e3cd64ef15e961a
 
 build:
@@ -14,14 +14,14 @@ build:
     - seqdiag = seqdiag.command:main
   noarch: python
   script: {{ PYTHON }} -m pip install . -vv
-  number: 0
+  number: 1
 
 requirements:
   host:
-    - python >=3.7
+    - python {{ python_min }}
     - pip
   run:
-    - python >=3.7
+    - python >={{ python_min }}
     - blockdiag >=3.0.0
 
 test:
@@ -32,6 +32,7 @@ test:
     - seqdiag --help
   requires:
     - pip
+    - python {{ python_min }}
 
 about:
   home: http://blockdiag.com/
